@@ -1,6 +1,7 @@
+import { useHistory } from "react-router";
+
 import PendingItemList from "../components/PendingItemList";
 import AcquiredItemList from "../components/AcquiredItemList";
-import NewItemSpace from "../components/NewItemSpace";
 
 const DUMMY_DATA = [
   {
@@ -46,10 +47,17 @@ const DUMMY_DATA = [
 ];
 
 export default function ListPage() {
+  const history = useHistory();
+
+  function goToForm() {
+    history.push("/new-item-form");
+  }
+
   return (
     <div>
+      <h1>Shopping List</h1>
       <PendingItemList items={DUMMY_DATA} />
-      <NewItemSpace />
+      <button onClick={goToForm}>Add Item</button>
       <AcquiredItemList items={DUMMY_DATA} />
     </div>
   );

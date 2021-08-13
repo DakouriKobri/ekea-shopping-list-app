@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-export default function AddItemForm() {
+export default function AddItemForm(props) {
   const nameInputRef = useRef();
   const priceInputRef = useRef();
   const pictureInputRef = useRef();
@@ -18,7 +18,7 @@ export default function AddItemForm() {
       picture: enteredPicture,
     };
 
-    console.log(itemData);
+    props.onAddItem(itemData);
   }
 
   return (
