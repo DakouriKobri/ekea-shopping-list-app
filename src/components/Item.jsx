@@ -20,7 +20,7 @@ export default function Item(props) {
         />
         <label>{props.name}</label>
         <label> {props.price}:-</label>
-        {/* <img src={props.pictureURL} alt={props.name} /> */}
+        <img src={props.pictureURL} alt={props.name} />
       </li>
     </div>
   );

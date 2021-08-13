@@ -1,9 +1,10 @@
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 
 import PendingItemList from "../components/PendingItemList";
 import AcquiredItemList from "../components/AcquiredItemList";
 
-const DUMMY_DATA = [
+/* const DUMMY_DATA = [
   {
     id: 1,
     name: "Baggebo Skap",
@@ -44,10 +45,44 @@ const DUMMY_DATA = [
     pictureURL:
       "https://www.ikea.com/se/sv/images/products/markus-kontorsstol-vissle-moerkgra__0724714_pe734597_s5.jpg?f=xl",
   },
-];
+]; */
 
 export default function ListPage() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadedItems, setLoadedItems] = useState([]);
   const history = useHistory();
+
+  useEffect(() => {
+    fetch(
+      "https://ekea-shopping-list-app-default-rtdb.firebaseio.com/items.json"
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        const items = [];
+
+        for (const key in data) {
+          const item = {
+            id: key,
+            ...data[key],
+          };
+
+          items.push(item);
+        }
+
+        setIsLoading(false);
+        setLoadedItems(items);
+      });
+  }, [isLoading]);
+
+  if (isLoading) {
+    <section>
+      <p>Loading...</p>
+    </section>;
+  }
+
+  console.log(loadedItems);
 
   function goToForm() {
     history.push("/new-item-form");
@@ -56,9 +91,9 @@ export default function ListPage() {
   return (
     <div>
       <h1>Shopping List</h1>
-      <PendingItemList items={DUMMY_DATA} />
+      <PendingItemList items={loadedItems} />
       <button onClick={goToForm}>Add Item</button>
-      <AcquiredItemList items={DUMMY_DATA} />
+      <AcquiredItemList items={loadedItems} />
     </div>
   );
 }

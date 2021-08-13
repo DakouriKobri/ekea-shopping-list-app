@@ -26,7 +26,7 @@ export default function AcquiredItemList(props) {
       <ul>
         {props.items &&
           props.items
-            .filter((item) => item.acquired === true)
+            // .filter((item) => item.acquired === true)
             .map((item) => (
               <Item
                 key={item.id}
