@@ -1,6 +1,6 @@
 import PendingItemList from "../components/PendingItemList";
 import AcquiredItemList from "../components/AcquiredItemList";
-import AddItemForm from "../components/AddItemForm";
+import NewItemSpace from "../components/NewItemSpace";
 
 const DUMMY_DATA = [
   {
@@ -49,7 +49,7 @@ export default function ListPage() {
   return (
     <div>
       <PendingItemList items={DUMMY_DATA} />
-      <AddItemForm />
+      <NewItemSpace />
       <AcquiredItemList items={DUMMY_DATA} />
     </div>
   );
