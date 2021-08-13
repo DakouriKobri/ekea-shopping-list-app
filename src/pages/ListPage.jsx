@@ -50,7 +50,7 @@ export default function ListPage() {
     <div>
       <PendingItemList items={DUMMY_DATA} />
       <AddItemForm />
-      <AcquiredItemList />
+      <AcquiredItemList items={DUMMY_DATA} />
     </div>
   );
 }

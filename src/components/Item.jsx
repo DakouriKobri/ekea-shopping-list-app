@@ -1,11 +1,12 @@
 import { useState } from "react";
 
 export default function Item(props) {
-  const [acquired, setAcquired] = useState(props.acquired);
+  const [item, setItem] = useState({ acquire: false });
 
-  function handleCheck() {
-    setAcquired(!acquired);
-  }
+  const handleCheck = (event) => {
+    const acquire = event.target.checked;
+    setItem({ ...item, [acquire]: !acquire });
+  };
 
   return (
     <div>
@@ -14,8 +15,8 @@ export default function Item(props) {
           type="checkbox"
           id={props.id}
           onChange={handleCheck}
-          acquired={props.acquired}
-          value={props.acquired}
+          checked={props.acquire}
+          value={props.acquire}
         />
         <label>{props.name}</label>
         <label> {props.price}:-</label>
