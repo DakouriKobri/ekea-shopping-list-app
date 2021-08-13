@@ -3,7 +3,6 @@ import Item from "./Item";
 export default function PendingItemList(props) {
   return (
     <div>
-      <h3>Pending items</h3>
       <ul>
         {props.items.map((item) => (
           <Item
@@ -20,4 +19,3 @@ export default function PendingItemList(props) {
     </div>
   );
 }
-// .filter((item) => item.acquired === false)

@@ -1,12 +1,23 @@
-import { useState } from "react";
+import { useContext } from "react";
+import AcquiredContext from "../store/acquired-context";
 
 export default function Item(props) {
-  const [item, setItem] = useState({ acquire: false });
+  const acquiredContextObject = useContext(AcquiredContext);
 
-  const handleCheck = (event) => {
-    const acquire = event.target.checked;
-    setItem({ ...item, [acquire]: !acquire });
-  };
+  const itemIsAcquired = acquiredContextObject.itemIsAcquired(props.id);
+
+  function toggleAcquiredStatusHandler() {
+    if (itemIsAcquired) {
+      acquiredContextObject.removeAcquired(props.id);
+    } else {
+      acquiredContextObject.addAcquired({
+        id: props.id,
+        name: props.name,
+        price: props.price,
+        picture: props.picture,
+      });
+    }
+  }
 
   return (
     <div>
@@ -14,7 +25,7 @@ export default function Item(props) {
         <input
           type="checkbox"
           id={props.id}
-          onChange={handleCheck}
+          onChange={toggleAcquiredStatusHandler}
           checked={props.acquire}
           value={props.acquire}
         />
